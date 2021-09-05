@@ -6,10 +6,12 @@ import 'customizable_icon_card.dart';
 class ResultsPage extends StatelessWidget {
   // const ResultsPage({Key? key}) : super(key: key);
 
-  String status = 'Normal';
-  String message = 'You have a normal body weight. Good Job!';
-  Color statusColor = Color(0xff21A965);
-  int bmi = 21;
+  ResultsPage({this.status, this.statusColor, this.bmi, this.message});
+
+  final String status;
+  final String message;
+  final Color statusColor;
+  final double bmi;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,7 @@ class ResultsPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            bmi.toString(),
+                            bmi.toStringAsFixed(1),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 100,
@@ -128,7 +130,9 @@ class ResultsPage extends StatelessWidget {
                 ),
                 height: kBottomContainerHeight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'RE-CALCULATE YOUR BMI',
                     style: TextStyle(

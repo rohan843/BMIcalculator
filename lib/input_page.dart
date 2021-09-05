@@ -1,7 +1,10 @@
+import 'package:bmi_calculator/results_page.dart';
+
 import 'customizable_icon_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
+import 'bmi_calculation.dart';
 
 const double kBottomContainerHeight = 78;
 const Color kBottomContainerColor = Color(0xffEB114D);
@@ -239,6 +242,36 @@ class _InputPageState extends State<InputPage> {
               height: kBottomContainerHeight,
               margin: EdgeInsets.only(
                 top: 10,
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Calculator calc = Calculator(height: height, weight: weight);
+                  String status;
+                  Color statusColor;
+                  double bmi;
+                  String message;
+                  Map res = calc.getData();
+                  status = res['status'];
+                  statusColor = res['color'];
+                  bmi = res['bmi'];
+                  message = res['message'];
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultsPage(
+                                status: status,
+                                statusColor: statusColor,
+                                bmi: bmi,
+                                message: message,
+                              )));
+                },
+                child: Text(
+                  'CALCULATE YOUR BMI',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                  ),
+                ),
               ),
             ),
           ],
